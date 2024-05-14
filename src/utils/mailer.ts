@@ -1,4 +1,3 @@
-import { User } from "@/models/user.model";
 import nodemailer from "nodemailer";
 import { generateToken } from "./generateToken";
 import bcrypt from "bcryptjs";
