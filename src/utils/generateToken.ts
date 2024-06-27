@@ -1,5 +1,4 @@
 import { User } from "@/models/user.model"
-import bcrypt from "bcryptjs";
 
 // hashing for Verify Token //
 export const generateToken= async(emailType:any, userId:any, hashedToken:any)=>{
