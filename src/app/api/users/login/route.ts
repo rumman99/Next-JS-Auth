@@ -8,18 +8,18 @@ import jwt from "jsonwebtoken";
 connectDB();
 
 const POST= async(req: NextRequest)=>{
-    const {email, password}= await req.json();
-
+    try{
     //  TODO NEED FIELD VALIDATION
 
-    try{
+    const {email, password:userPassword}= await req.json();
+
         const user= await User.findOne({email, isVerified:true});
 
         if(!user){
             return NextResponse.json({error: "Invalid Email or Password!!!"}, {status:500})
         }
 
-        const verifyPassword= bcrypt.compare(password, user.password);
+        const verifyPassword= bcrypt.compare(userPassword, user.password);
 
         if(!verifyPassword){
             return NextResponse.json({error: "Invalid Email or Password!!!"}, {status:500})
@@ -31,7 +31,7 @@ const POST= async(req: NextRequest)=>{
 
         const {password, ...userWithoutPassword}= user;
 
-        const response= NextResponse.json({message: "", success:true, user:userWithoutPassword});
+        const response= NextResponse.json({message: "Login Successful", success:true, user:userWithoutPassword}, {status:200});
 
         response.cookies.set('token', jwtToken, {httpOnly:true, secure:true})
 

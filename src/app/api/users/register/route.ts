@@ -45,7 +45,7 @@ export const POST = async(req: NextRequest)=>{
     // Verification Email //
         await sendMail({email, emailType: "VERIFY", userId: savedUser._id})
 
-        return NextResponse.json({message: "User Registered Successfully", success: true, savedUser});
+        return NextResponse.json({message: "User Registered Successfully", success: true, savedUser}, {status:200});
     } 
     catch (error:any) {
         return NextResponse.json({error: error.message},{status: 500})
