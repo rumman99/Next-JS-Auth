@@ -15,6 +15,9 @@ interface UserInterface{
 connectDB();
 
 export const POST = async(req: NextRequest)=>{
+
+        //  TODO NEED FIELD VALIDATION
+        
     try {
         const {username, email, password, fullName}:UserInterface = await req.json();
 
